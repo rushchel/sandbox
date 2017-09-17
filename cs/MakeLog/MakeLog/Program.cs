@@ -15,6 +15,7 @@ namespace MakeLog
         {
             Console.WriteLine("Hello, World!");
             Logger.Trace("Trace message");
+            Logger.Error("Error message");
             Console.ReadLine();
         }
     }
