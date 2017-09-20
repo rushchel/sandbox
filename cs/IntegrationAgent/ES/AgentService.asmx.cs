@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using System.Configuration;
-using Oracle.ManagedDataAccess.Client;
 using NLog;
 using ES.V3;
+using ES.Utils;
 
 namespace ES
 {
@@ -26,29 +25,23 @@ namespace ES
         public const string XmlNS = "http://otpbank.ru/ocl/ia/";
 
         [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-
-        [WebMethod]
-        public string GetCountRows()
+        public string TestConnectDb()
         {
             try
             {
-                logger.Trace("Trace message");
-                string connectStr = ConfigurationManager.ConnectionStrings["DbConnect"].ConnectionString;
-                OracleConnection conn = new OracleConnection(connectStr);
-                conn.Open();
-                OracleCommand cmd = new OracleCommand("select count(*) from ia_cs_log", conn);
-                string res = cmd.ExecuteScalar().ToString();
-                conn.Close();
-                return res;
+                return OraDB.DoTestQuery();
             }
             catch (Exception ex)
             {
+                logger.Error(ex, "Произошла ошибка!");
                 return ex.Message;
             }
+        }
+
+        [WebMethod]
+        public string GetType(ChildClass inp)
+        {
+            return inp.GetType().ToString();
         }
 
         [WebMethod]
@@ -58,5 +51,18 @@ namespace ES
             GetDirectoryResponse resp = new GetDirectoryResponse();
             return resp;
         }
+    }
+
+    //[System.Xml.Serialization.XmlInclude(typeof(ChildClass))]
+    public abstract class BaseClass
+    {
+        public string guid;
+        public string maker;
+    }
+
+    //[Serializable]
+    public class ChildClass : BaseClass
+    {
+        public string model;
     }
 }

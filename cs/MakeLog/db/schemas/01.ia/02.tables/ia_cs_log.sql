@@ -1,11 +1,11 @@
 create sequence sq_ia_cs_log;
 create table ia_cs_log (
   logid number not null
- ,app varchar2(50)
+ ,app varchar2(255)
  ,logged timestamp
  ,lvl varchar2(50)
  ,message varchar2(4000)
- ,logger varchar2(250)
+ ,logger varchar2(255)
  ,constraint pk_ia_cs_log primary key (logid)
 )
 partition by range(logged) interval (numtoyminterval(3,'month'))
