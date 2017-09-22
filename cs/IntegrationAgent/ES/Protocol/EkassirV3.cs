@@ -56,7 +56,7 @@ namespace ES.V3
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ekassir.com/eKassir/PaySystem/Server/eKassirV3Protocol")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://ekassir.com/eKassir/PaySystem/Server/eKassirV3Protocol", IsNullable=false)]
-    public abstract partial class Request {
+    public /*abstract*/ partial class Request {
     
         private string externalPointIdField;
     

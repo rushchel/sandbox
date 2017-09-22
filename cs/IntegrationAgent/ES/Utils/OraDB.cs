@@ -58,10 +58,10 @@ namespace ES.Utils
             try
             {
                 OpenConnect();
-                logger.Trace("Тестовый запрос в БД");
                 OracleCommand cmd = new OracleCommand("select 'Success' from dual", oraConnection);
                 string res = cmd.ExecuteScalar().ToString();
                 CloseConnect();
+                logger.Trace("Выполнен тестовый запрос в БД");
                 return res;
             }
             catch (Exception causeEx)

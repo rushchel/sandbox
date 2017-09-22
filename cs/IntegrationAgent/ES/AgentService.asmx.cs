@@ -6,13 +6,16 @@ using System.Web.Services;
 using NLog;
 using ES.V3;
 using ES.Utils;
+using System.IO;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace ES
 {
     /// <summary>
     /// Summary description for AgentService
     /// </summary>
-    [WebService(Namespace = XmlNS)]
+    [WebService(Namespace = Schema.xmlNS)]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -21,8 +24,6 @@ namespace ES
     {
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        public const string XmlNS = "http://otpbank.ru/ocl/ia/";
 
         [WebMethod]
         public string TestConnectDb()
@@ -39,30 +40,36 @@ namespace ES
         }
 
         [WebMethod]
-        public string GetType(ChildClass inp)
+        public string DoValidation(XmlDocument request)
         {
-            return inp.GetType().ToString();
+            try
+            {
+                XmlDocument inp = request;
+                Schema.Validate(inp);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Произошла ошибка!");
+                return ex.Message;
+            }
         }
 
         [WebMethod]
-        public Response GetDirectory(Request request)
+        public string GetRequestType(XmlDocument request)
         {
-            GetDirectoryRequest rq = (GetDirectoryRequest)request;
-            GetDirectoryResponse resp = new GetDirectoryResponse();
-            return resp;
+            try
+            {
+                XmlDocument inp = request;
+                Schema.Validate(inp);
+                string result = inp.DocumentElement.GetAttribute("type", "http://www.w3.org/2001/XMLSchema-instance");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Произошла ошибка!");
+                return ex.Message;
+            }
         }
-    }
-
-    //[System.Xml.Serialization.XmlInclude(typeof(ChildClass))]
-    public abstract class BaseClass
-    {
-        public string guid;
-        public string maker;
-    }
-
-    //[Serializable]
-    public class ChildClass : BaseClass
-    {
-        public string model;
     }
 }

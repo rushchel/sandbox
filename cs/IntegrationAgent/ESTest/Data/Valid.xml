@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mstns:Request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:mstns="http://ekassir.com/eKassir/PaySystem/Server/eKassirV3Protocol"
+               xsi:type="mstns:AddPaymentTemplateRequest"
+               ExternalPointId=""
+               ServiceId="0"
+               Name="String"
+               PaymentAmount="0"
+               PaymentCurrency="a"
+               IsFavorite="false"
+               xsi:schemaLocation="http://ekassir.com/eKassir/PaySystem/Server/eKassirV3Protocol eKassirV3Protocol.xsd">
+  <PersonalData PersonalAccountId="0" TemplateId="0">
+    <Extension>
+      <Item Key="String" Value="String"/>
+    </Extension>
+  </PersonalData>
+  <Extension>
+    <Item Key="String" Value="String"/>
+  </Extension>
+  <PaymentParameters>
+    <Parameter Name="a" Value="String"/>
+  </PaymentParameters>
+</mstns:Request>
