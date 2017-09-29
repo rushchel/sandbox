@@ -68,6 +68,7 @@
     </Content>
     <Content Include="Data\Valid.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Choose>
