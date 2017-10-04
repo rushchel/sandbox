@@ -86,8 +86,10 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\My.pubxml" />
     <None Include="Protocol\EkassirV3.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -109,7 +111,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\EkassirV3.cs" />
+    <Compile Include="Utils\Auth.cs" />
     <Compile Include="Utils\OraDB.cs" />
+    <Compile Include="Utils\Schema.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
